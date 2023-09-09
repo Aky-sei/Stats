@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1, h2, input, button {
+            display: inline-block;
+        }
+    </style>
+    <title>Stats</title>
+</head>
+<body>
+    <h1>Puntos totales:</h1> <input type="number" id="puntosTotales" value="30"></input> <button id="confirmarPuntos">Ok</button>
+    <br>
+    <h1>Puntos restantes:</h1> <h2 id="puntosRestantes">30</h2>
+    <br>
+    <h1 style="width: 10rem; text-align: center; display: block; margin-bottom: 0;">+2/+1</h1>
+    <button class="botonMenos" id="fueMenos">-</button> <h2 id="fuePuntos">8</h2> <button class="botonMas" id="fueMas">+</button>
+    <input type="radio" name="masDos" value="0" id="fueDos"> <input type="radio" name="masUno" value="0" id="fueUno">
+    <h1>Fuerza:</h1> <h2 id="fueFinal">8</h2> <h2 id="fueBono">(-1)</h2>
+    <br>
+    <button class="botonMenos" id="desMenos">-</button> <h2 id="desPuntos">8</h2> <button class="botonMas" id="desMas">+</button>
+    <input type="radio" name="masDos" value="1" id="desDos"> <input type="radio" name="masUno" value="1" id="desUno">
+    <h1>Destreza:</h1> <h2 id="desFinal">8</h2> <h2 id="desBono">(-1)</h2>
+    <br>
+    <button class="botonMenos" id="conMenos">-</button> <h2 id="conPuntos">8</h2> <button class="botonMas" id="conMas">+</button>
+    <input type="radio" name="masDos" value="2" id="conDos"> <input type="radio" name="masUno" value="2" id="conUno">
+    <h1>Constitución:</h1> <h2 id="conFinal">8</h2> <h2 id="conBono">(-1)</h2>
+    <br>
+    <button class="botonMenos" id="intMenos">-</button> <h2 id="intPuntos">8</h2> <button class="botonMas" id="intMas">+</button>
+    <input type="radio" name="masDos" value="3" id="intDos"> <input type="radio" name="masUno" value="3" id="intUno">
+    <h1>Inteligencia:</h1> <h2 id="intFinal">8</h2> <h2 id="intBono">(-1)</h2>
+    <br>
+    <button class="botonMenos" id="sabMenos">-</button> <h2 id="sabPuntos">8</h2> <button class="botonMas" id="sabMas">+</button>
+    <input type="radio" name="masDos" value="4" id="sabDos"> <input type="radio" name="masUno" value="4" id="sabUno">
+    <h1>Sabiduria:</h1> <h2 id="sabFinal">8</h2> <h2 id="sabBono">(-1)</h2>
+    <br>
+    <button class="botonMenos" id="carMenos">-</button> <h2 id="carPuntos">8</h2> <button class="botonMas" id="carMas">+</button>
+    <input type="radio" name="masDos" value="5" id="carDos"> <input type="radio" name="masUno" value="5" id="carUno">
+    <h1>Carisma:</h1> <h2 id="carFinal">8</h2> <h2 id="carBono">(-1)</h2>
+    <p>
+        - Empiezan con todas las características en 8
+    </p>
+    <p>
+        - Disponen de un total de 30 puntos 
+    </p>
+    <p>
+        - Subir la característica a valores entre 9 y 13 cuesta 1 punto, 14 y 15 cuesta 2 puntos, 16 y 17, 3 puntos y 18, 4 puntos
+    </p>
+    <p>
+        - Tienen dos bonificadores que pueden asignar a cualquier caracteristica, un +2 y un +1
+    </p>
+    <p>
+        - Con ninguna característica pueden exceder 18, incluyendo bonificadores
+    </p>
+    <script >
+var botonConfirmar = document.getElementById("confirmarPuntos")
+var puntosTotales = document.getElementById("puntosTotales")
+var puntosRestantes = document.getElementById("puntosRestantes")
+
+var fueMas = document.getElementById("fueMas")
+fueMas.addEventListener("click",() => sumar(0))
+var desMas = document.getElementById("desMas")
+desMas.addEventListener("click",() => sumar(1))
+var conMas = document.getElementById("conMas")
+conMas.addEventListener("click",() => sumar(2))
+var intMas = document.getElementById("intMas")
+intMas.addEventListener("click",() => sumar(3))
+var sabMas = document.getElementById("sabMas")
+sabMas.addEventListener("click",() => sumar(4))
+var carMas = document.getElementById("carMas")
+carMas.addEventListener("click",() => sumar(5))
+
+var fueMenos = document.getElementById("fueMenos")
+fueMenos.addEventListener("click",() => restar(0))
+var desMenos = document.getElementById("desMenos")
+desMenos.addEventListener("click",() => restar(1))
+var conMenos = document.getElementById("conMenos")
+conMenos.addEventListener("click",() => restar(2))
+var intMenos = document.getElementById("intMenos")
+intMenos.addEventListener("click",() => restar(3))
+var sabMenos = document.getElementById("sabMenos")
+sabMenos.addEventListener("click",() => restar(4))
+var carMenos = document.getElementById("carMenos")
+carMenos.addEventListener("click",() => restar(5))
+
+
+
+var stats = [8,8,8,8,8,8]
+var statsFinal = [8,8,8,8,8,8]
+var masDos = 6
+var masUno = 6
+var pool = 30
+
+botonConfirmar.addEventListener("click",asignarPuntosTotales)
+
+function asignarPuntosTotales() {
+    puntosRestantes.innerHTML = puntosTotales.value
+    pool = parseInt(puntosTotales.value)
+    stats = [8,8,8,8,8,8]
+    dibujar()
+}
+
+function sumar(index) {
+    if (stats[index] < 13 && pool >= 1) {
+        pool --
+        stats[index] ++
+    } else if (stats[index] < 15 && pool >=2) {
+        pool = pool -2
+        stats[index] ++
+    } else if (stats[index] < 17 && pool >=3) {
+        pool = pool -3
+        stats[index] ++
+    } else if (stats[index] < 18 && pool >=4) {
+        pool = pool -4
+        stats[index] ++
+    // } else if (stats[index] < 20 && pool >=5) {
+    //     pool = pool -5
+    //     stats[index] ++
+    }
+    dibujar();
+}
+
+function restar(index) {
+    if (stats[index] < 9) {
+        // NADA
+    } else if (stats[index] < 14) {
+        pool ++
+        stats[index] --
+    } else if (stats[index] < 16) {
+        pool = pool +2
+        stats[index] --
+    } else if (stats[index] < 18) {
+        pool = pool +3
+        stats[index] --
+    } else if (stats[index] < 20) {
+        pool = pool +4
+        stats[index] --
+    }
+    dibujar();
+}
+
+function dibujar() {
+    document.getElementById("fuePuntos").innerHTML = stats[0]
+    document.getElementById("desPuntos").innerHTML = stats[1]
+    document.getElementById("conPuntos").innerHTML = stats[2]
+    document.getElementById("intPuntos").innerHTML = stats[3]
+    document.getElementById("sabPuntos").innerHTML = stats[4]
+    document.getElementById("carPuntos").innerHTML = stats[5]
+    statsFinal = stats.slice()
+    hallarDosYUno()
+    statsFinal[masUno] ++
+    statsFinal[masDos] ++
+    statsFinal[masDos] ++
+    document.getElementById("fueFinal").innerHTML = statsFinal[0]
+    document.getElementById("desFinal").innerHTML = statsFinal[1]
+    document.getElementById("conFinal").innerHTML = statsFinal[2]
+    document.getElementById("intFinal").innerHTML = statsFinal[3]
+    document.getElementById("sabFinal").innerHTML = statsFinal[4]
+    document.getElementById("carFinal").innerHTML = statsFinal[5]
+    puntosRestantes.innerHTML = pool;
+    if (statsFinal[0] >= 10) {
+        document.getElementById("fueBono").innerHTML = "(+" + Math.floor((statsFinal[0]-10)/2) + ")"
+    } else {
+        document.getElementById("fueBono").innerHTML = "(-1)"
+    }
+    if (statsFinal[1] >= 10) {
+        document.getElementById("desBono").innerHTML = "(+" + Math.floor((statsFinal[1]-10)/2) + ")"
+    } else {
+        document.getElementById("desBono").innerHTML = "(-1)"
+    }
+    if (statsFinal[2] >= 10) {
+        document.getElementById("conBono").innerHTML = "(+" + Math.floor((statsFinal[2]-10)/2) + ")"
+    } else {
+        document.getElementById("conBono").innerHTML = "(-1)"
+    }
+    if (statsFinal[3] >= 10) {
+        document.getElementById("intBono").innerHTML = "(+" + Math.floor((statsFinal[3]-10)/2) + ")"
+    } else {
+        document.getElementById("intBono").innerHTML = "(-1)"
+    }
+    if (statsFinal[4] >= 10) {
+        document.getElementById("sabBono").innerHTML = "(+" + Math.floor((statsFinal[4]-10)/2) + ")"
+    } else {
+        document.getElementById("sabBono").innerHTML = "(-1)"
+    }
+    if (statsFinal[5] >= 10) {
+        document.getElementById("carBono").innerHTML = "(+" + Math.floor((statsFinal[5]-10)/2) + ")"
+    } else {
+        document.getElementById("carBono").innerHTML = "(-1)"
+    }
+}
+
+function hallarDosYUno() {
+    var dos = document.getElementsByName("masDos")
+    dos.forEach(element => {
+        if (element.checked) {
+            masDos=parseInt(element.value)
+        } 
+    });
+    var uno = document.getElementsByName("masUno")
+    uno.forEach(element => {
+        if (element.checked) {
+            masUno=parseInt(element.value)
+        } 
+    });
+}
+
+document.getElementById("fueDos").addEventListener("click",dibujar)
+document.getElementById("desDos").addEventListener("click",dibujar)
+document.getElementById("conDos").addEventListener("click",dibujar)
+document.getElementById("intDos").addEventListener("click",dibujar)
+document.getElementById("sabDos").addEventListener("click",dibujar)
+document.getElementById("carDos").addEventListener("click",dibujar)
+document.getElementById("fueUno").addEventListener("click",dibujar)
+document.getElementById("desUno").addEventListener("click",dibujar)
+document.getElementById("conUno").addEventListener("click",dibujar)
+document.getElementById("intUno").addEventListener("click",dibujar)
+document.getElementById("sabUno").addEventListener("click",dibujar)
+document.getElementById("carUno").addEventListener("click",dibujar)
+    </script>
+</body>
+</html>
