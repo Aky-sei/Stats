@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
         h1, h2, input, button {
             display: inline-block;
         }
@@ -11,49 +15,62 @@
     <title>Stats</title>
 </head>
 <body>
-    <h1>Puntos totales:</h1> <input type="number" id="puntosTotales" value="30"></input> <button id="confirmarPuntos">Ok</button>
-    <br>
-    <h1>Puntos restantes:</h1> <h2 id="puntosRestantes">30</h2>
-    <br>
-    <h1 style="width: 10rem; text-align: center; display: block; margin-bottom: 0;">+2/+1</h1>
-    <button class="botonMenos" id="fueMenos">-</button> <h2 id="fuePuntos">8</h2> <button class="botonMas" id="fueMas">+</button>
-    <input type="radio" name="masDos" value="0" id="fueDos"> <input type="radio" name="masUno" value="0" id="fueUno">
-    <h1>Fuerza:</h1> <h2 id="fueFinal">8</h2> <h2 id="fueBono">(-1)</h2>
-    <br>
-    <button class="botonMenos" id="desMenos">-</button> <h2 id="desPuntos">8</h2> <button class="botonMas" id="desMas">+</button>
-    <input type="radio" name="masDos" value="1" id="desDos"> <input type="radio" name="masUno" value="1" id="desUno">
-    <h1>Destreza:</h1> <h2 id="desFinal">8</h2> <h2 id="desBono">(-1)</h2>
-    <br>
-    <button class="botonMenos" id="conMenos">-</button> <h2 id="conPuntos">8</h2> <button class="botonMas" id="conMas">+</button>
-    <input type="radio" name="masDos" value="2" id="conDos"> <input type="radio" name="masUno" value="2" id="conUno">
-    <h1>Constitución:</h1> <h2 id="conFinal">8</h2> <h2 id="conBono">(-1)</h2>
-    <br>
-    <button class="botonMenos" id="intMenos">-</button> <h2 id="intPuntos">8</h2> <button class="botonMas" id="intMas">+</button>
-    <input type="radio" name="masDos" value="3" id="intDos"> <input type="radio" name="masUno" value="3" id="intUno">
-    <h1>Inteligencia:</h1> <h2 id="intFinal">8</h2> <h2 id="intBono">(-1)</h2>
-    <br>
-    <button class="botonMenos" id="sabMenos">-</button> <h2 id="sabPuntos">8</h2> <button class="botonMas" id="sabMas">+</button>
-    <input type="radio" name="masDos" value="4" id="sabDos"> <input type="radio" name="masUno" value="4" id="sabUno">
-    <h1>Sabiduria:</h1> <h2 id="sabFinal">8</h2> <h2 id="sabBono">(-1)</h2>
-    <br>
-    <button class="botonMenos" id="carMenos">-</button> <h2 id="carPuntos">8</h2> <button class="botonMas" id="carMas">+</button>
-    <input type="radio" name="masDos" value="5" id="carDos"> <input type="radio" name="masUno" value="5" id="carUno">
-    <h1>Carisma:</h1> <h2 id="carFinal">8</h2> <h2 id="carBono">(-1)</h2>
-    <p>
-        - Empiezan con todas las características en 8
-    </p>
-    <p>
-        - Disponen de un total de 30 puntos 
-    </p>
-    <p>
-        - Subir la característica a valores entre 9 y 13 cuesta 1 punto, 14 y 15 cuesta 2 puntos, 16 y 17, 3 puntos y 18, 4 puntos
-    </p>
-    <p>
-        - Tienen dos bonificadores que pueden asignar a cualquier caracteristica, un +2 y un +1
-    </p>
-    <p>
-        - Con ninguna característica pueden exceder 18, incluyendo bonificadores
-    </p>
+    <div>
+        <h1>Puntos totales:</h1> <input type="number" id="puntosTotales" value="30"></input> <button id="confirmarPuntos">Ok</button>
+        <br>
+        <h1>Puntos restantes:</h1> <h2 id="puntosRestantes">30</h2>
+        <br>
+        <h1 style="width: 10rem; text-align: center; display: block; margin-bottom: 0;">+2/+1</h1>
+        <button class="botonMenos" id="fueMenos">-</button> <h2 id="fuePuntos">8</h2> <button class="botonMas" id="fueMas">+</button>
+        <input type="radio" name="masDos" value="0" id="fueDos"> <input type="radio" name="masUno" value="0" id="fueUno">
+        <h1>Fuerza:</h1> <h2 id="fueFinal">8</h2> <h2 id="fueBono">(-1)</h2>
+        <br>
+        <button class="botonMenos" id="desMenos">-</button> <h2 id="desPuntos">8</h2> <button class="botonMas" id="desMas">+</button>
+        <input type="radio" name="masDos" value="1" id="desDos"> <input type="radio" name="masUno" value="1" id="desUno">
+        <h1>Destreza:</h1> <h2 id="desFinal">8</h2> <h2 id="desBono">(-1)</h2>
+        <br>
+        <button class="botonMenos" id="conMenos">-</button> <h2 id="conPuntos">8</h2> <button class="botonMas" id="conMas">+</button>
+        <input type="radio" name="masDos" value="2" id="conDos"> <input type="radio" name="masUno" value="2" id="conUno">
+        <h1>Constitución:</h1> <h2 id="conFinal">8</h2> <h2 id="conBono">(-1)</h2>
+        <br>
+        <button class="botonMenos" id="intMenos">-</button> <h2 id="intPuntos">8</h2> <button class="botonMas" id="intMas">+</button>
+        <input type="radio" name="masDos" value="3" id="intDos"> <input type="radio" name="masUno" value="3" id="intUno">
+        <h1>Inteligencia:</h1> <h2 id="intFinal">8</h2> <h2 id="intBono">(-1)</h2>
+        <br>
+        <button class="botonMenos" id="sabMenos">-</button> <h2 id="sabPuntos">8</h2> <button class="botonMas" id="sabMas">+</button>
+        <input type="radio" name="masDos" value="4" id="sabDos"> <input type="radio" name="masUno" value="4" id="sabUno">
+        <h1>Sabiduria:</h1> <h2 id="sabFinal">8</h2> <h2 id="sabBono">(-1)</h2>
+        <br>
+        <button class="botonMenos" id="carMenos">-</button> <h2 id="carPuntos">8</h2> <button class="botonMas" id="carMas">+</button>
+        <input type="radio" name="masDos" value="5" id="carDos"> <input type="radio" name="masUno" value="5" id="carUno">
+        <h1>Carisma:</h1> <h2 id="carFinal">8</h2> <h2 id="carBono">(-1)</h2>
+        <p>
+            - Empiezan con todas las características en 8
+        </p>
+        <p>
+            - Disponen de un total de 30 puntos 
+        </p>
+        <p>
+            - Subir la característica a valores entre 9 y 13 cuesta 1 punto, 14 y 15 cuesta 2 puntos, 16 y 17, 3 puntos y 18, 4 puntos
+        </p>
+        <p>
+            - Tienen dos bonificadores que pueden asignar a cualquier caracteristica, un +2 y un +1
+        </p>
+        <p>
+            - Con ninguna característica pueden exceder 18, incluyendo bonificadores
+        </p>
+    </div>
+    <div>
+        <h1>TIRAR DADOS</h1>
+        <p id="resultadoTirar">RESULTADO:</p>
+        <button id="tirard100">D100</button>
+        <button id="tirard20">D20</button>
+        <button id="tirard12">D12</button>
+        <button id="tirard10">D10</button>
+        <button id="tirard8">D8</button>
+        <button id="tirard6">D6</button>
+        <button id="tirard4">D4</button>
+    </div>
     <script >
 var botonConfirmar = document.getElementById("confirmarPuntos")
 var puntosTotales = document.getElementById("puntosTotales")
@@ -219,6 +236,22 @@ document.getElementById("conUno").addEventListener("click",dibujar)
 document.getElementById("intUno").addEventListener("click",dibujar)
 document.getElementById("sabUno").addEventListener("click",dibujar)
 document.getElementById("carUno").addEventListener("click",dibujar)
+
+// ---------parte 2---------
+
+document.getElementById("tirard100").addEventListener("click",() => tirarDado(100))
+document.getElementById("tirard20").addEventListener("click",() => tirarDado(20))
+document.getElementById("tirard12").addEventListener("click",() => tirarDado(12))
+document.getElementById("tirard10").addEventListener("click",() => tirarDado(10))
+document.getElementById("tirard8").addEventListener("click",() => tirarDado(8))
+document.getElementById("tirard6").addEventListener("click",() => tirarDado(6))
+document.getElementById("tirard4").addEventListener("click",() => tirarDado(4))
+
+function tirarDado(n) {
+    let a = Math.floor(Math.random() * n) + 1
+    document.getElementById("resultadoTirar").innerHTML="RESULTADO:" + a
+}
+
     </script>
 </body>
 </html>
